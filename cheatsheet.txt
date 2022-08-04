@@ -1,0 +1,113 @@
+COMMANDS FOR DATABASES
+1. View All Databases
+-> show dbs;
+
+2. Create a new or switch Databases
+-> use db_name;
+
+3. Check current Database
+-> db;
+
+4. Delete Databases
+-> db.dropDatabase();
+
+COMMANDS FOR COLLECTIONS
+1. to see all the COLLECTIONS in db
+-> show collections;
+
+2. Create a collection
+-> db.createCollection('Collection_name');
+
+3. Delete collection
+-> db.collection_name.drop();
+
+COMMANDS FOR ROWS(BSON OR DOCUMENTS)
+1. Insert 1 ROW
+-> db.collection_name.insert({
+    'name': 'Kunal',
+    'lang': 'JavaScript',
+    'member': 5
+})
+
+2. Insert Many Rows
+-> db.collection_name.insertMany([{
+    'name': 'Kunal',
+    'lang': 'JavaScript',
+    'member': 5
+},
+{
+    'name': 'Sid',
+    'lang': 'TypeScript',
+    'member': 4
+},
+{
+    'name': 'Star',
+    'lang': 'Java',
+    'member': 3
+}
+])
+
+3. Show all rows in the collection
+-> db.comments.find();
+
+4. Show all rows in the collection in Pretty Version
+-> db.comments.find().pretty();
+
+5. Search in MongoDb Database
+-> db.collection_name.find({lang:'Java'});
+
+6. Show n rows in the collection
+-> db.collection_name.find().limit(n);
+
+7. Count the number of rows in output
+-> db.collection_name.find().count();
+
+8. Sort the rows based on some key in ascending order
+-> db.collection_name.find().sort({member:1});
+
+9. Sort the rows based on some key in desceding order
+-> db.collection_name.find().sort({member:-1});
+
+10. Find first row matching the object
+-> db.collection_name.findOne({name: 'Kunal'});
+
+11. Update a ROW with name as Sid
+-> db.collection_name.update({name: 'Sid'}, {
+    $set:
+{
+    'name': 'Kunal_Master',
+    'lang': 'JavaScript',
+    'member': 10
+}});
+
+12. Update even if not present
+-> db.collection_name.update({name: 'Sid'}, {
+    $set:
+{
+    'name': 'Kunal_Master',
+    'lang': 'JavaScript',
+    'member': 10
+}}, {upsert: true});
+
+13. MongoDb Increment Operator
+-> db.collection_name.update({name: 'Star'}, {
+    $inc:
+{
+    'member_modified': 2 
+}});
+
+13. MongoDb Rename Field Operator
+-> db.collection_name.update({name: 'Star'}, {
+    $rename:
+{
+    member: 'member_modified'
+}});
+
+14. Delete rows
+-> db.comments.remove({name: 'Kunal_Master'});
+
+15. Show entries greater Than 2
+-> db.comments.find({member: {$lt: 2}});
+
+16. Less Than or Equals/ greater than or Equals
+-> db.comments.find({member: {$lte: 5}});
